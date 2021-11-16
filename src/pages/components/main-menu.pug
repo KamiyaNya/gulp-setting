@@ -1,0 +1,8 @@
+mixin item(url, label, selected)
+  li(class=(selected ? 'selected' : ''))
+    a(href=url)= label
+
+#main-menu
+  ul
+    +item('/', 'Страница 1', mainMenuSelected == 1)
+    +item('/other.html', 'Страница 2', mainMenuSelected == 2)

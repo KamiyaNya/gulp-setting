@@ -1,0 +1,21 @@
+include ../mixins/style
+include ../mixins/js
+
+block variables
+
+doctype html
+html
+  head
+    title Page - #{title}
+    meta(charset='utf-8')
+    meta(name='viewport', content='width=device-width, initial-scale=1, shrink-to-fit=no')
+    block styles
+      +style('/assets/css/common.css')
+  body
+    #footer-push
+      include ../components/header.pug
+      block content
+    include ../components/footer.pug
+    block scripts
+      +js('/assets/vendors/jquery/jquery-3.6.0.min.js')
+      +js('/assets/js/common.js')

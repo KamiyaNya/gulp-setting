@@ -1,0 +1,36 @@
+@import (less) "../vendors/reset/reset.css";
+@import "variables/variables";
+@import "mixins/media";
+@import "components/header";
+@import "components/main-menu";
+@import "components/footer";
+
+* {
+  font-family: sans-serif;
+  font-size: 14px;
+}
+
+h1 {
+  font-size: 24px;
+  padding: @padding;
+}
+
+a {
+  color: @link-color;
+  text-decoration: none;
+  transition: @transition;
+
+  &:hover {
+    color: @link-color_hover;
+  }
+}
+
+.wrapper {
+  width: 1200px;
+  margin: 0 auto;
+
+  .md({
+    width: 100%;
+    padding: @padding;
+  }, "lte");
+}

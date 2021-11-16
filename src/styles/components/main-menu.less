@@ -1,0 +1,29 @@
+#main-menu {
+  margin-bottom: -1px;
+
+  ul {
+    padding: 0;
+    margin: 0;
+    list-style-type: none;
+    display: flex;
+    flex-wrap: nowrap;
+
+    li {
+      border-bottom: 2px solid transparent;
+      transition: @transition;
+
+      &:hover {
+        border-color: @primary-color;
+      }
+
+      &.selected {
+        border-color: @primary-color;
+      }
+
+      a {
+        display: block;
+        padding: @padding;
+      }
+    }
+  }
+}

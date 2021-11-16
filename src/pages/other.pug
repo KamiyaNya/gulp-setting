@@ -1,0 +1,30 @@
+extends layout/main.pug
+
+append variables
+  - var title = 'Страница 2'
+  - var mainMenuSelected = 2
+
+mixin galleryItem(url)
+  div
+    a(href=url, data-lightbox='cats')
+      img(src=url)
+
+block content
+  main
+    .wrapper#other
+      h1= 'Страница 2'
+      .gallery
+        +galleryItem('/assets/images/gallery/cat-1.jpg')
+        +galleryItem('/assets/images/gallery/cat-1.jpg')
+        +galleryItem('/assets/images/gallery/cat-1.jpg')
+        +galleryItem('/assets/images/gallery/cat-1.jpg')
+        +galleryItem('/assets/images/gallery/cat-1.jpg')
+        +galleryItem('/assets/images/gallery/cat-1.jpg')
+
+append styles
+  +style('/assets/css/other.css')
+  +style('/assets/vendors/lightbox2/css/lightbox.min.css')
+
+append scripts
+  +js('/assets/vendors/lightbox2/js/lightbox.min.js')
+  +js('/assets/js/other.js')
