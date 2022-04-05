@@ -6,7 +6,7 @@ const sourcemaps = require('gulp-sourcemaps');
 const browserSync = require('browser-sync');
 const webpack = require('webpack-stream');
 const named = require('vinyl-named');
-const less = require('gulp-less');
+const sass = require("gulp-sass")(require("sass"));
 const cleanCSS = require('gulp-clean-css');
 const pug = require('gulp-pug');
 const imagemin = require('gulp-imagemin');
@@ -41,9 +41,9 @@ const js = () => {
 
 const styles = () => {
   return gulp
-    .src('./src/styles/*.less')
+    .src('./src/styles/*.scss')
     .pipe(gulpif(process.env.NODE_ENV === 'development', sourcemaps.init()))
-    .pipe(less())
+    .pipe(sass())
     .pipe(gulpif(process.env.NODE_ENV === 'production', cleanCSS()))
     .pipe(gulpif(process.env.NODE_ENV === 'development', sourcemaps.write()))
     .pipe(gulp.dest('./build/assets/css'));
@@ -67,7 +67,7 @@ const build = gulp.series(clean, gulp.parallel(vendors, styles, js, html, images
 
 const watch = () => {
   gulp.watch('./src/vendors/**/*', vendors);
-  gulp.watch('./src/styles/**/*.less', styles);
+  gulp.watch('./src/styles/**/*.scss', styles);
   gulp.watch('./src/js/**/*.js', js);
   gulp.watch('./src/pages/**/*.pug', html);
   gulp.watch('./src/images/**/*', images);

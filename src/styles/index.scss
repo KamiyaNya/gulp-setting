@@ -1,0 +1,13 @@
+@import "variables/vars";
+@import "mixins/text";
+
+#index {
+  img {
+    margin-bottom: $padding;
+    max-width: 100%;
+  }
+
+  p {
+    margin-bottom: $padding;
+  }
+}

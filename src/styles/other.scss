@@ -1,0 +1,14 @@
+@import "variables/vars";
+
+#other {
+  .gallery {
+    display: flex;
+    flex-wrap: wrap;
+
+    & > div {
+      width: 25%;
+      padding: $padding;
+
+    }    
+  }
+}

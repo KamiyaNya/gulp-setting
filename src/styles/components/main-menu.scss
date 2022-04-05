@@ -10,19 +10,19 @@
 
     li {
       border-bottom: 2px solid transparent;
-      transition: @transition;
+      transition: $transition;
 
       &:hover {
-        border-color: @primary-color;
+        border-color: $primary-color;
       }
 
       &.selected {
-        border-color: @primary-color;
+        border-color: $primary-color;
       }
 
       a {
         display: block;
-        padding: @padding;
+        padding: $padding;
       }
     }
   }

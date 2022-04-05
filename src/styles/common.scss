@@ -1,5 +1,4 @@
-@import (less) "../vendors/reset/reset.css";
-@import "variables/variables";
+@import "variables/vars";
 @import "mixins/media";
 @import "components/header";
 @import "components/main-menu";
@@ -12,25 +11,22 @@
 
 h1 {
   font-size: 24px;
-  padding: @padding;
+  padding: $padding;
+  color: $red;
 }
 
 a {
-  color: @link-color;
+  color: $link-color;
   text-decoration: none;
-  transition: @transition;
+  transition: $transition;
 
   &:hover {
-    color: @link-color_hover;
+    color: $link-color_hover;
   }
 }
 
 .wrapper {
   width: 1200px;
   margin: 0 auto;
-
-  .md({
-    width: 100%;
-    padding: @padding;
-  }, "lte");
+  color: blue;
 }
