@@ -30,3 +30,23 @@ a {
   margin: 0 auto;
   color: blue;
 }
+
+/* смартфоны, сенсорные экраны */
+@media (hover: none) and (pointer:ough) {
+  /* ... */
+}
+
+/* экраны со стилусом */
+@media (hover: none) and (pointer: fine) {
+  /* ... */
+}
+
+/* Контроллер Nintendo Wii, Microsoft Kinect */
+@media (hover: hover) and (pointer:rough) {
+  /* ... */
+}
+
+/* мышь, сенсорная панель */
+@media (hover: hover) and (pointer: fine) {
+  /* ... */
+}
