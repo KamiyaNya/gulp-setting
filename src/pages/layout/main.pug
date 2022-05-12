@@ -1,21 +1,23 @@
 include ../mixins/style
 include ../mixins/js
+include ../mixins/jsvendors
+include ../mixins/img
 
 block variables
 
 doctype html
 html
   head
-    title Page - #{title}
+    title #{title}
     meta(charset='utf-8')
-    meta(name='viewport', content='width=device-width, initial-scale=1, shrink-to-fit=no')
+    meta(name='viewport' content='width=device-width, initial-scale=1, shrink-to-fit=no')
     block styles
-      +style('/assets/css/common.css')
+      +style('common.css')
   body
-    #footer-push
-      include ../components/header.pug
+    .content
+      include ../partials/header.pug
       block content
-    include ../components/footer.pug
+    include ../partials/footer.pug
+    +jsvendors('jquery/jquery-3.6.0.min.js')
+    +js('common.js')
     block scripts
-      +js('/assets/vendors/jquery/jquery-3.6.0.min.js')
-      +js('/assets/js/common.js')

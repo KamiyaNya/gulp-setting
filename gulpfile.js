@@ -58,9 +58,16 @@ const html = () => {
 
 const images = () => {
   return gulp
-    .src('./src/images/**/*')
-    .pipe(imagemin())
-    .pipe(gulp.dest('./build/assets/images'));
+    .src("./src/images/**/*")
+    .pipe(
+      imagemin([
+        imagemin.mozjpeg({
+          quality: 90,
+          progressive: true,
+        }),
+      ])
+    )
+    .pipe(gulp.dest("./build/assets/images"));
 }
 
 const build = gulp.series(clean, gulp.parallel(vendors, styles, js, html, images));
