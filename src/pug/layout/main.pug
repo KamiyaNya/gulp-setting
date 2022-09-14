@@ -1,0 +1,24 @@
+include ../mixins/style
+include ../mixins/js
+include ../mixins/img
+
+block variables
+
+doctype html
+html
+	head
+		title #{title}
+		meta(charset='utf-8')
+		meta(name='viewport' content='width=device-width, initial-scale=1, shrink-to-fit=no')
+		+style('global.css')
+		+style('common.css')
+		block styles
+	body
+		.content
+			include ../partials/header.pug
+			block content
+		include ../partials/footer.pug
+		+js('libs.min.js')
+		+js('global/global.min.js')
+		+js('main/main.min.js')
+		block scripts
