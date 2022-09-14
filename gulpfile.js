@@ -19,7 +19,7 @@ const svgmin = require("gulp-svgmin");
 const sprite = require("gulp-svg-sprite");
 const chalk = require("chalk");
 
-const cssPlugins = [];
+const cssPlugins = ["node_modules/swiper/swiper-bundle.min.css"];
 const jsPlugins = ["node_modules/swiper/swiper-bundle.min.js"];
 
 const clean = () => {
@@ -219,10 +219,9 @@ const watch = () => {
 	gulp.watch("./src/vendors/**/*", vendors);
 	gulp.watch("./src/styles/**/*.scss", styles);
 	gulp.watch("./src/js/**/*.js", jsScript);
-	gulp.watch("./src/pages/**/*.pug", html);
+	gulp.watch("./src/pug/**/*.pug", html);
 	gulp.watch("./src/img/**/*", rastr);
 	gulp.watch("./build/**/*").on("change", browserSync.reload);
-	gulp.watch("./build/*").on("change", browserSync.reload);
 };
 
 const start = gulp.series(
