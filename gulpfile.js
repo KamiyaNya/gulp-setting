@@ -36,11 +36,11 @@ const jsScript = () => {
 		.src("./src/js/scripts/*.js")
 		.pipe(gulpif(process.env.NODE_ENV === "development", sourcemaps.init()))
 		.pipe(uglify())
-		.pipe(
-			babel({
-				presets: ["@babel/env"],
-			})
-		)
+		// .pipe(
+		// 	babel({
+		// 		presets: ["@babel/env"],
+		// 	})
+		// )
 		.pipe(concat("main.min.js"))
 		.pipe(gulpif(process.env.NODE_ENV === "development", sourcemaps.write()))
 		.pipe(gulp.dest("./build/assets/js/main"))
@@ -53,11 +53,11 @@ const jsGlobal = () => {
 		.src("./src/js/lib/*.js")
 		.pipe(gulpif(process.env.NODE_ENV === "development", sourcemaps.init()))
 		.pipe(uglify())
-		.pipe(
-			babel({
-				presets: ["@babel/env"],
-			})
-		)
+		// .pipe(
+		// 	babel({
+		// 		presets: ["@babel/env"],
+		// 	})
+		// )
 		.pipe(concat("global.min.js"))
 		.pipe(gulpif(process.env.NODE_ENV === "development", sourcemaps.write()))
 		.pipe(gulp.dest("./build/assets/js/global"))
