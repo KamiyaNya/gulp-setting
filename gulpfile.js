@@ -50,21 +50,19 @@ const jsScript = () => {
 
 // * Задача для js ("Глобальные скрипты")
 const jsGlobal = () => {
-	return (
-		gulp
-			.src("./src/js/lib/*.js")
-			.pipe(gulpif(process.env.NODE_ENV === "development", sourcemaps.init()))
-			.pipe(uglify())
-			// .pipe(
-			// 	babel({
-			// 		presets: ["@babel/env"],
-			// 	})
-			// )
-			.pipe(concat("global.min.js"))
-			.pipe(gulpif(process.env.NODE_ENV === "development", sourcemaps.write()))
-			.pipe(gulp.dest("./build/assets/js/global"))
-			.pipe(browserSync.stream())
-	);
+	return gulp
+		.src("./src/js/lib/*.js")
+		.pipe(gulpif(process.env.NODE_ENV === "development", sourcemaps.init()))
+		.pipe(uglify())
+		.pipe(
+			babel({
+				presets: ["@babel/env"],
+			})
+		)
+		.pipe(concat("global.min.js"))
+		.pipe(gulpif(process.env.NODE_ENV === "development", sourcemaps.write()))
+		.pipe(gulp.dest("./build/assets/js/global"))
+		.pipe(browserSync.stream());
 };
 
 // * Задача для стилей
@@ -146,13 +144,13 @@ const rastr = () => {
 				]
 			)
 		)
-		.pipe(gulp.dest("./build/img"))
+		.pipe(gulp.dest("./build/assets/img"))
 		.pipe(browserSync.stream());
 };
 
 const svgSprite = () => {
 	return gulp
-		.src("./src/svg/**/*.svg")
+		.src("./src/img/svg/**/*.svg")
 		.pipe(
 			svgmin({
 				plugins: [
@@ -174,7 +172,7 @@ const svgSprite = () => {
 				},
 			})
 		)
-		.pipe(gulp.dest("src/img"));
+		.pipe(gulp.dest("./build/assets/img"));
 };
 
 const build = gulp.series(
@@ -192,7 +190,7 @@ const watch = () => {
 	gulp.watch("./src/pug/**/*.pug", html);
 	gulp.watch("./src/img/**/*", rastr);
 	gulp.watch("./src/img/**/*", svgSprite);
-	gulp.watch("./src/**/*").on("change", browserSync.reload);
+	gulp.watch("./build/**/*").on("change", browserSync.reload);
 };
 
 const start = gulp.series(
