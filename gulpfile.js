@@ -1,3 +1,4 @@
+/* eslint-disable no-undef */
 const gulp = require("gulp");
 const gulpif = require("gulp-if");
 const del = require("del");
@@ -17,10 +18,10 @@ const pngquant = require("imagemin-pngquant");
 const plumber = require("gulp-plumber");
 const svgmin = require("gulp-svgmin");
 const sprite = require("gulp-svg-sprite");
-const chalk = require("chalk");
 
-const cssPlugins = ["node_modules/swiper/swiper-bundle.min.css"];
-const jsPlugins = ["node_modules/swiper/swiper-bundle.min.js"];
+const cssPluginsFunc = require("./tasks/CssPlugins.js");
+const jsPluginsFunc = require("./tasks/JsPlugins.js");
+const ftp = require("./tasks/ftp.js");
 
 const clean = () => {
 	return del(["./build"]);
@@ -36,11 +37,11 @@ const jsScript = () => {
 		.src("./src/js/scripts/*.js")
 		.pipe(gulpif(process.env.NODE_ENV === "development", sourcemaps.init()))
 		.pipe(uglify())
-		// .pipe(
-		// 	babel({
-		// 		presets: ["@babel/env"],
-		// 	})
-		// )
+		.pipe(
+			babel({
+				presets: ["@babel/env"],
+			})
+		)
 		.pipe(concat("main.min.js"))
 		.pipe(gulpif(process.env.NODE_ENV === "development", sourcemaps.write()))
 		.pipe(gulp.dest("./build/assets/js/main"))
@@ -49,35 +50,21 @@ const jsScript = () => {
 
 // * Задача для js ("Глобальные скрипты")
 const jsGlobal = () => {
-	return gulp
-		.src("./src/js/lib/*.js")
-		.pipe(gulpif(process.env.NODE_ENV === "development", sourcemaps.init()))
-		.pipe(uglify())
-		// .pipe(
-		// 	babel({
-		// 		presets: ["@babel/env"],
-		// 	})
-		// )
-		.pipe(concat("global.min.js"))
-		.pipe(gulpif(process.env.NODE_ENV === "development", sourcemaps.write()))
-		.pipe(gulp.dest("./build/assets/js/global"))
-		.pipe(browserSync.stream());
-};
-
-// * Задача для js плагинов
-const jsPluginsFunc = (done) => {
-	if (jsPlugins.length > 0)
-		return gulp
-			.src(jsPlugins)
-			.pipe(sourcemaps.init())
+	return (
+		gulp
+			.src("./src/js/lib/*.js")
+			.pipe(gulpif(process.env.NODE_ENV === "development", sourcemaps.init()))
 			.pipe(uglify())
-			.pipe(concat("libs.min.js"))
-			.pipe(sourcemaps.write())
-			.pipe(gulp.dest("./build/assets/js"))
-			.pipe(browserSync.stream());
-	else {
-		return done(console.log(chalk.redBright("No added JS plugins")));
-	}
+			// .pipe(
+			// 	babel({
+			// 		presets: ["@babel/env"],
+			// 	})
+			// )
+			.pipe(concat("global.min.js"))
+			.pipe(gulpif(process.env.NODE_ENV === "development", sourcemaps.write()))
+			.pipe(gulp.dest("./build/assets/js/global"))
+			.pipe(browserSync.stream())
+	);
 };
 
 // * Задача для стилей
@@ -115,26 +102,6 @@ const styles = () => {
 		.pipe(gulpif(process.env.NODE_ENV === "development", sourcemaps.write()))
 		.pipe(gulp.dest("./build/assets/css"))
 		.pipe(browserSync.stream());
-};
-
-// * Задача для стилей плагинов
-const cssPluginsFunc = (done) => {
-	if (cssPlugins.length > 0) {
-		return gulp
-			.src(cssPlugins)
-			.pipe(sourcemaps.init())
-			.pipe(
-				sass({
-					outputStyle: "compressed",
-				}).on("error", sass.logError)
-			)
-			.pipe(concat("libs.min.css"))
-			.pipe(sourcemaps.write())
-			.pipe(gulp.dest("./build/assets/css"))
-			.pipe(browserSync.stream());
-	} else {
-		return done(console.log(chalk.redBright("No added CSS/SCSS plugins")));
-	}
 };
 
 // * Задача для конвертации pug в html
@@ -218,10 +185,14 @@ const build = gulp.series(
 const watch = () => {
 	gulp.watch("./src/vendors/**/*", vendors);
 	gulp.watch("./src/styles/**/*.scss", styles);
-	gulp.watch("./src/js/**/*.js", jsScript);
+	gulp.watch("./src/js/scripts/**/*.js", jsScript);
+	gulp.watch("./src/js/lib/**/*.js", jsScript);
+	gulp.watch("./tasks/CssPlugins.js", cssPluginsFunc);
+	gulp.watch("./tasks/JsPlugins.js", jsPluginsFunc);
 	gulp.watch("./src/pug/**/*.pug", html);
 	gulp.watch("./src/img/**/*", rastr);
-	gulp.watch("./build/**/*").on("change", browserSync.reload);
+	gulp.watch("./src/img/**/*", svgSprite);
+	gulp.watch("./src/**/*").on("change", browserSync.reload);
 };
 
 const start = gulp.series(
@@ -233,3 +204,4 @@ const start = gulp.series(
 exports.build = build;
 exports.watch = watch;
 exports.start = start;
+exports.deploy = ftp;
