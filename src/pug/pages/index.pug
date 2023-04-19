@@ -1,0 +1,17 @@
+extends ../layout/main.pug
+
+append variables
+	- var title = 'Список';
+
+block content
+	main.main
+		ul 
+			li 
+				a(href="index", target="_blank", rel="noopener noreferrer") Главная
+			li 
+				a(href="catalog1", target="_blank", rel="noopener noreferrer") Каталог 1
+			li 
+				a(href="catalog2", target="_blank", rel="noopener noreferrer") Каталог 2
+
+append styles
+	+style('index.css')
