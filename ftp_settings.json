@@ -1,0 +1,6 @@
+{
+	"host": "youdomain.ru",
+	"user": "user",
+	"pass": "password",
+	"parallel": 10
+}
