@@ -4,6 +4,8 @@ const cleanCSS = require('gulp-clean-css');
 const prefixer = require('gulp-autoprefixer');
 const browserSync = require('browser-sync');
 const gulpif = require('gulp-if');
+const sourcemaps = require("gulp-sourcemaps");
+
 
 // * Задача для стилей
 module.exports = function () {
