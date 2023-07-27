@@ -9,9 +9,9 @@ const plumber = require('gulp-plumber');
 // * Задача для оптимизации растровых изображений
 module.exports = function () {
 	return gulp
-		.src('./src/img/**/*.+(png|jpg|jpeg|gif|svg|ico)', { ignore: './src/img/svg/**/*' })
+		.src('./src/images/**/*.+(png|jpg|jpeg|gif|svg|ico)')
 		.pipe(plumber())
-		.pipe(changed('./build/img'))
+		.pipe(changed('./build/images'))
 		.pipe(
 			imagemin(
 				{
@@ -22,12 +22,12 @@ module.exports = function () {
 				[
 					recompress({
 						loops: 6,
-						min: 50,
+						min: 80,
 						max: 90,
 						quality: 'high',
 						use: [
 							pngquant({
-								quality: [0.8, 1],
+								quality: [0.85, 1],
 								strip: true,
 								speed: 1,
 							}),
@@ -39,6 +39,6 @@ module.exports = function () {
 				]
 			)
 		)
-		.pipe(gulp.dest('./build/assets/img'))
+		.pipe(gulp.dest('./build/assets/images'))
 		.pipe(browserSync.stream());
 };

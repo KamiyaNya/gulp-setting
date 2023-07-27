@@ -5,14 +5,14 @@ const browserSync = require('browser-sync');
 
 const cssPluginsFunc = require('./tasks/CssPlugins.js');
 const jsPluginsFunc = require('./tasks/JsPlugins.js');
-const ftp = require('./tasks/ftp.js');
+const ftp = require('./tasks/Ftp.js');
 const html = require('./tasks/Pug.js');
 const styles = require('./tasks/Style.js');
 const rastr = require('./tasks/Rastr.js');
 const fonts = require('./tasks/Fonts.js');
 const svgSprite = require('./tasks/Sprite.js');
-const jsScript = require('./tasks/jsMain.js');
-const jsGlobal = require('./tasks/jsGlobal.js');
+const jsScript = require('./tasks/ScriptMain.js');
+const jsGlobal = require('./tasks/ScriptGlobal.js');
 
 const clean = () => {
 	return del(['./build']);

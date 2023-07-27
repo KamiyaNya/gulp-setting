@@ -1,6 +1,7 @@
 include ../mixins/style
-include ../mixins/js
-include ../mixins/img
+include ../mixins/script
+include ../mixins/image
+include ../mixins/sprite
 
 block variables
 
@@ -19,7 +20,7 @@ html
 			include ../partials/header.pug
 			block content
 		include ../partials/footer.pug
-		+js('libs.min.js')
-		+js('global/global.min.js')
-		+js('main/main.min.js')
+		+script('libs.min.js')
+		+script('global.min.js')
+		+script('main.min.js')
 		block scripts

@@ -4,7 +4,7 @@ const sprite = require('gulp-svg-sprite');
 
 module.exports = function () {
 	return gulp
-		.src('./src/img/svg/**/*.svg')
+		.src('./src/sprite/*.svg')
 		.pipe(
 			svgmin({
 				plugins: [

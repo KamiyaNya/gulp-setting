@@ -1,0 +1,5 @@
+mixin image({src, className, dataSrc})
+	- if(src)
+		img(src=`../assets/images/${src}` alt="alt" class=className )&attributes(attributes)
+	- else 
+		img(data-src=`../assets/images/${dataSrc}` class=`${className !== undefined ? className : ''} lazyload`)&attributes(attributes)

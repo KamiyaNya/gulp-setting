@@ -32,6 +32,6 @@ module.exports = function () {
 			)
 		)
 		.pipe(gulpif(process.env.NODE_ENV === 'development', sourcemaps.write()))
-		.pipe(gulp.dest('./build/assets/css'))
+		.pipe(gulp.dest('./build/assets/styles'))
 		.pipe(browserSync.stream());
 };

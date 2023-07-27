@@ -20,7 +20,7 @@ module.exports = function cssPluginsFunc(done) {
 			)
 			.pipe(concat("libs.min.css"))
 			.pipe(sourcemaps.write())
-			.pipe(gulp.dest("./build/assets/css"))
+			.pipe(gulp.dest("./build/assets/styles"))
 			.pipe(browserSync.stream());
 	} else {
 		return done(console.log(chalk.redBright("No added CSS/SCSS plugins")));

@@ -16,7 +16,7 @@ module.exports = function jsPluginsFunc(done) {
 			.pipe(uglify())
 			.pipe(concat("libs.min.js"))
 			.pipe(sourcemaps.write())
-			.pipe(gulp.dest("./build/assets/js"))
+			.pipe(gulp.dest("./build/assets/scripts"))
 			.pipe(browserSync.stream());
 	else {
 		return done(console.log(chalk.redBright("No added JS plugins")));
